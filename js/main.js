@@ -22,6 +22,9 @@ import {
   BUYNOW_BTN,
   ORDER_BTN,
   CANCEL_BTN,
+  BRANDS_BTN,
+  SAMSUNG_BTN,
+  IPHONE_BTN,
 } from "./constants/constant.js";
 import { renderPaymentModal } from "./controller/payment.controller.js";
 import { generateRandomNumber } from "./utils.js";
@@ -32,7 +35,12 @@ const getProductsList = async () => {
 };
 let cartList = [];
 const productList = await getProductsList();
-
+const iphoneList = productList.filter(({ type }) => {
+  return type.toLowerCase() === "iphone";
+});
+const samsungList = productList.filter(({ type }) => {
+  return type.toLowerCase() === "samsung";
+});
 // LOCAL STORAGE
 const setLocalStorage = (data) => {
   const phoneCartJSON = JSON.stringify(data);
@@ -170,32 +178,7 @@ const subtractCartQuantity = (item_id) => {
   renderCartIndicator(cartList);
   setLocalStorage(cartList);
 };
-const renderIphoneList = () => {
-  const iPhoneCheck = document.getElementById("iphone-check");
-  iPhoneCheck.addEventListener("click", () => {
-    if (iPhoneCheck.checked) {
-      const iphoneList = productList.filter(({ type }) => {
-        return type.toLowerCase() === "iphone";
-      });
-      renderProductsList(iphoneList);
-    } else {
-      renderProductsList(productList);
-    }
-  });
-};
-const renderSamsungList = () => {
-  const samsungCheck = document.getElementById("samsung-check");
-  samsungCheck.addEventListener("click", () => {
-    if (samsungCheck.checked) {
-      const samsungList = productList.filter(({ type }) => {
-        return type.toLowerCase() === "samsung";
-      });
-      renderProductsList(samsungList);
-    } else {
-      renderProductsList(productList);
-    }
-  });
-};
+// HANDLE SEARCH
 const renderSearchList = () => {
   let searchInput = document.getElementById("search-brands-input").value;
   let searchList = [];
@@ -212,6 +195,8 @@ const renderSearchList = () => {
     ).innerHTML = `<p>Không tìm thấy sản phẩm</p>`;
   }
 };
+
+// RENDER
 const renderProductDetail = (product_id) => {
   PRODUCT_MODAL.style.display = "flex";
   let product = productList.find(({ id }) => {
@@ -374,13 +359,14 @@ const renderProductDetail = (product_id) => {
   PRODUCT_MODAL.innerHTML = productDetail;
 };
 
+// INITIALIZE
 function inititialize() {
   getLocalStorage();
 
   renderProductsList(productList);
-  renderIphoneList();
-  renderSamsungList();
-
+  //   renderIphoneList();
+  //   renderSamsungList();
+  // renderFilterList();
   window.addItem = addItem;
   window.buyItem = buyItem;
   window.deleteItem = deleteItem;
@@ -394,10 +380,27 @@ function inititialize() {
   SEARCH_BTN.addEventListener("click", () => {
     renderSearchList();
   });
+  SAMSUNG_BTN.addEventListener("click", () => {
+    if (SAMSUNG_BTN.checked) {
+      renderProductsList(samsungList);
+    } else {
+      renderProductsList(productList);
+    }
+  });
+  IPHONE_BTN.addEventListener("click", () => {
+    if (IPHONE_BTN.checked) {
+      renderProductsList(iphoneList);
+    } else {
+      renderProductsList(productList);
+    }
+  });
   HOME_BTN.addEventListener("click", () => {
     renderProductsList(productList);
   });
   PRODUCT_BTN.addEventListener("click", () => {
+    renderProductsList(productList);
+  });
+  BRANDS_BTN.addEventListener("click", () => {
     renderProductsList(productList);
   });
   CLEAR_BTN.addEventListener("click", () => {

@@ -10,4 +10,7 @@ export const CLEAR_BTN = document.getElementById("clear-btn"),
   BUYNOW_BTN = document.getElementById("buy-now-btn"),
   ORDER_BTN = document.getElementById("order-confirm"),
   CANCEL_BTN = document.getElementById("cancel-btn"),
+  BRANDS_BTN = document.getElementById("brands-btn"),
+  IPHONE_BTN = document.getElementById("iphone-check"),
+  SAMSUNG_BTN = document.getElementById("samsung-check"),
   BASE_URL = "https://62f24e04b1098f15081009f0.mockapi.io";

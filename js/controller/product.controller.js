@@ -17,7 +17,11 @@ export const renderProductsList = (dataList) => {
             <span class="text-lg font-semibold text-gray-600 text-opacity-80 line-through decoration-double mr-3"
               >$${item.price * 1.5}
             </span>
-            <span class="text-sm text-red-500 border-2 border-red-400 bg-transparent">-40%</span>
+            <span class="text-sm text-red-500 border-2 border-red-400 bg-transparent">${Math.floor(
+              Math.abs(
+                ((item.price - item.price * 1.5) * 100) / (item.price * 1.5)
+              )
+            )}%</span>
           </h3> 
           <p class="text-lg">${item.desc}</p>
         </div>
