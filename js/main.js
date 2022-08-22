@@ -21,6 +21,7 @@ import {
   PHONES_CART_LOCALSTORAGE,
   BUYNOW_BTN,
   ORDER_BTN,
+  CANCEL_BTN,
 } from "./constants/constant.js";
 import { renderPaymentModal } from "./controller/payment.controller.js";
 import { generateRandomNumber } from "./utils.js";
@@ -74,7 +75,6 @@ const addItem = (item_id) => {
 };
 const buyItem = (item_id) => {
   PRODUCT_MODAL.style.display = "none";
-  document.getElementById("cart-modal").style.display = "flex";
   const productIndex = productList.findIndex((product) => {
     return product.id === item_id;
   });
@@ -213,6 +213,7 @@ const renderSearchList = () => {
   }
 };
 const renderProductDetail = (product_id) => {
+  PRODUCT_MODAL.style.display = "flex";
   let product = productList.find(({ id }) => {
     return id === product_id;
   });
@@ -346,27 +347,31 @@ const renderProductDetail = (product_id) => {
           })"></i>
         </form>
         <div class="card-actions">
-          <button
-            class="btn items-center py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
-            onClick="addItem(${product.id})">
-            <i class="fa-solid fa-cart-shopping mr-1"></i>
-            <span class="uppercase">add to cart</span>
-          <button/>
-          <label
-            id="buy-now-btn"  
-            for="cart-modal-toggle"
-            class="btn items-center py-3 text-sm font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300"
-            onClick="buyItem(${product.id})">
-            <i class="fa-solid fa-cart-shopping mr-1"></i>
-            <span class="uppercase">buy now</span>
-          </label>
+          <button>
+            <label
+              for="product-details-modal-toggle"
+              class="btn items-center py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+              onClick="addItem(${product.id})">
+              <i class="fa-solid fa-cart-shopping mr-1"></i>
+              <span class="uppercase">add to cart</span>
+            <label/>
+          </button>
+          <button>
+            <label
+              id="buy-now-btn"  
+              for="cart-modal-toggle"
+              class="btn items-center py-3 text-sm font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300"
+              onClick="buyItem(${product.id})">
+              <i class="fa-solid fa-cart-shopping mr-1"></i>
+              <span class="uppercase">buy now</span>
+            </label>
+            </button>
         </div>
         </div>
       </div>
     </div>
   </div>`;
   PRODUCT_MODAL.innerHTML = productDetail;
-  PRODUCT_MODAL.style.display = "flex";
 };
 
 function inititialize() {
@@ -386,12 +391,6 @@ function inititialize() {
   window.subtractCartQuantity = subtractCartQuantity;
   window.renderProductDetail = renderProductDetail;
 
-  VIEWCART_BTN.addEventListener("click", () => {
-    document.getElementById("cart-modal").style.display = "flex";
-  });
-  CLEAR_BTN.addEventListener("click", () => {
-    clearCart();
-  });
   SEARCH_BTN.addEventListener("click", () => {
     renderSearchList();
   });
@@ -401,19 +400,51 @@ function inititialize() {
   PRODUCT_BTN.addEventListener("click", () => {
     renderProductsList(productList);
   });
+  CLEAR_BTN.addEventListener("click", () => {
+    clearCart();
+  });
   CHECKOUT_BTN.addEventListener("click", () => {
     renderPaymentModal(cartList);
-    document.getElementById("payment-modal").style.display = "flex";
-    document.getElementById("cart-modal").style.display = "none";
+    if (cartList.length <= 1) {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,225%)";
+    } else if (cartList.length <= 3) {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,140%)";
+    } else {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,120%)";
+    }
   });
   PAYMENT_BTN.addEventListener("click", () => {
-    document.getElementById("payment-modal").style.display = "none";
+    if (cartList.length <= 1) {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,-225%)";
+    } else if (cartList.length <= 3) {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,-140%)";
+    } else {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,-120%)";
+    }
     document.getElementById("order-id").innerHTML = generateRandomNumber();
     document.getElementById("receipt-value").innerHTML = `$${getTotalCartValue(
       cartList
     )}`;
+    clearCart();
   });
-  ORDER_BTN.addEventListener("click", () => {});
+  CANCEL_BTN.addEventListener("click", () => {
+    if (cartList.length <= 1) {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,-225%)";
+    } else if (cartList.length <= 3) {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,-140%)";
+    } else {
+      document.getElementById("payment-modal").style.transform =
+        "translate(0,-120%)";
+    }
+  });
 }
 
 inititialize();

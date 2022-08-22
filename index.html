@@ -180,29 +180,26 @@
             </table>
           </div>
           <div class="modal-action">
-            <label id="checkout-btn" for="payment-modal-toggle" class="btn bg-blue-500 hover:bg-blue-700 text-white rounded-md"><i class="fa-solid fa-credit-card mr-2"></i>Check out</label>
+            <label id="checkout-btn" for="cart-modal-toggle" class="btn bg-blue-500 hover:bg-blue-700 text-white rounded-md"><i class="fa-solid fa-credit-card mr-2"></i>Check out</label>
             <button id="clear-btn" class="btn bg-red-500 hover:bg-red-700 text-white rounded-md"><i class="fa-solid fa-trash-can mr-2"></i>Clear</button>
           </div>
         </label>
       </label>
     </div>
     <!-- PAYMENT PAGE MODAL -->
-    <input type="checkbox" id="payment-modal-toggle" class="modal-toggle" />
-    <div id="payment-modal" class="modal">
-      <div class="modal-box w-11/12 max-w-5xl">
-        <div id="payment-modal-content">
-        </div>
-        <div class="my-3">
+    <div id="payment-modal" class="bg-slate-100 pb-10 px-5 pt-3 flex flex-col shadow-xl shadow-slate-500 rounded-lg duration-700" style="position: absolute; left:30%; top: -50%; width: 800px" >
+      <div id="payment-modal-content">
+      </div>
+      <div class="my-3">
           <h4 class="text-xl font-bold">Payment</h4>
           <div class="flex justify-between">
             <p class="text-xl">Total Payment</p>
             <span id="total-payment-value" class="text-2xl font-bold"></span>
           </div>
         </div>
-        <div class="modal-action">
-          <label id="payment-btn" for="receipt-modal-toggle" class="btn bg-green-500 hover:bg-green-700 text-white rounded-md"><i class="fa-solid fa-credit-card mr-2"></i>Thanh Toán</label>
-          <label for="payment-modal-toggle" class="btn bg-red-500 hover:bg-red-700 text-white rounded-md">Cancel</label>
-        </div>
+      <div class="modal-action">
+        <label id="payment-btn" for="receipt-modal-toggle" class="btn bg-green-500 hover:bg-green-700 text-white rounded-md"><i class="fa-solid fa-credit-card mr-2"></i>Thanh Toán</label>
+        <label id="cancel-btn" class="btn bg-red-500 hover:bg-red-700 text-white rounded-md">Cancel</label>
       </div>
     </div>
     <!-- RECEIPT MODAL  -->

@@ -9,4 +9,5 @@ export const CLEAR_BTN = document.getElementById("clear-btn"),
   PHONES_CART_LOCALSTORAGE = "PHONE_CART_LOCALSTORAGE",
   BUYNOW_BTN = document.getElementById("buy-now-btn"),
   ORDER_BTN = document.getElementById("order-confirm"),
+  CANCEL_BTN = document.getElementById("cancel-btn"),
   BASE_URL = "https://62f24e04b1098f15081009f0.mockapi.io";
