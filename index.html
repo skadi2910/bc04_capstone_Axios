@@ -17,16 +17,9 @@
     <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Shopping Cart</title>
-
-    <style>
-      * {
-        outline: 0px solid red;
-      }
-    </style>
   </head>
-
   <body data-theme="wireframe" class="bg-slate-100">
-    <div class="container pt-6 w-4/5 mx-auto z-40">
+    <header id="header" class="container pt-6 w-4/5 mx-auto z-40">
       <div class="navbar bg-base-100 border-b-2 justify-end">
         <div class="flex-1 absolute left-1/4 translate-x-12 hover:bg-none">
           <a id="home-btn" class="uppercase text-3xl font-bold text-black cursor-pointer"
@@ -83,14 +76,12 @@
                     Xem Giỏ Hàng
                   </label>
                 </div>         
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </header>
     <div id="content" class="container py-6 w-4/5 mx-auto mt-8">
       <div class="flex flex-row gap-8 mt-2">
         <aside id="side-nav" class="w-1/5 flex-auto text-left">
@@ -150,7 +141,6 @@
         </div>
       </div>
     </div>
-
     <!-- PRODUCT DETAILS MODAL -->
      <div>
       <input type="checkbox" id="product-details-modal-toggle" class="modal-toggle" />
